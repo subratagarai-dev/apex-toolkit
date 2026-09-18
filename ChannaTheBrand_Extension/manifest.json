@@ -1,0 +1,104 @@
+{
+  "manifest_version": 3,
+  "name": "ChannaTheBrand Tool Pro",
+  "version": "10.0",
+  "description": "SessionBox-Grade Multi-Session Container, 15s/30s/60s Bypass, Anti-Detection Shield, 1080P Watermark-Free Auto-Downloader & Dola AI Suite",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "cookies",
+    "downloads",
+    "offscreen",
+    "tabs",
+    "webNavigation",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "scripting"
+  ],
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "host_permissions": [
+    "*://dola.com/*",
+    "*://*.dola.com/*",
+    "*://doubao.com/*",
+    "*://*.doubao.com/*",
+    "*://seaart.ai/*",
+    "*://*.seaart.ai/*",
+    "*://*.byteintl.com/*",
+    "*://*.ibytedtos.com/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://dola.com/*",
+        "*://*.dola.com/*",
+        "*://doubao.com/*",
+        "*://*.doubao.com/*",
+        "*://seaart.ai/*",
+        "*://*.seaart.ai/*"
+      ],
+      "js": [
+        "extractor.js",
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "*://dola.com/*",
+        "*://*.dola.com/*",
+        "*://doubao.com/*",
+        "*://*.doubao.com/*",
+        "*://seaart.ai/*",
+        "*://*.seaart.ai/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "ChannaTheBrand Tool Pro",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "extractor.js",
+        "inject.js",
+        "video-zip-offscreen.html",
+        "video-zip-offscreen.js",
+        "hevc-decode.wasm",
+        "hevc-decode.js",
+        "icon16.png",
+        "icon48.png",
+        "icon128.png",
+        "easypaisa_qr.png"
+      ],
+      "matches": [
+        "*://dola.com/*",
+        "*://*.dola.com/*",
+        "*://doubao.com/*",
+        "*://*.doubao.com/*",
+        "*://seaart.ai/*",
+        "*://*.seaart.ai/*"
+      ]
+    }
+  ]
+}

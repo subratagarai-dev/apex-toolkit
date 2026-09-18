@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ChannaTheBrand Pro</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="brand">
+                <img src="icon128.png" class="avatar-img" alt="ChannaTheBrand Logo">
+                <div>
+                    <h1 class="title">ChannaTheBrand Pro</h1>
+                    <span class="version-badge" id="btn-reload-extension" style="cursor: pointer;" title="Click to Hot-Reload Extension">v10.0 Hot-Swap</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <button id="btn-open-donate-modal" class="donate-header-pill" title="Support Creator / Buy Me a Coffee" type="button">
+                    <span>☕</span> Tip
+                </button>
+                <div class="active-badge" id="header-active-account" title="Currently Active Account">
+                    🟢 Default
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN UNLOCKED INTERFACE (100% Free Edition) -->
+        <div id="main-unlocked-ui">
+            <!-- Navigation Tabs (5 Tabs) -->
+            <div class="nav-tabs">
+                <button class="nav-btn active" id="tab-generator">🎥 Studio</button>
+                <button class="nav-btn" id="tab-prompts">📝 Prompts</button>
+                <button class="nav-btn" id="tab-accounts">👥 Accounts</button>
+                <button class="nav-btn" id="tab-settings">⚙️ Settings</button>
+                <button class="nav-btn" id="tab-logs">📋 Logs</button>
+            </div>
+
+            <!-- TAB 1: STUDIO (Generator Section) -->
+            <div class="tab-content" id="view-generator">
+                <div class="status-card" style="padding: 2px 5px; margin-bottom: 0px;">
+                    <div class="pulse-dot" style="width: 5px; height: 5px;"></div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div>
+                            <div class="status-title" style="font-size: 9.5px; font-weight: 800;">Dola AI Suite Ready</div>
+                            <div class="status-sub" id="status-credits-sub" style="font-size: 7.5px; color: #94a3b8;">30s Bypassed Duration • 2 Pts per Video</div>
+                        </div>
+                        <div class="badges-row" style="margin: 0; gap: 2px;">
+                            <span class="badge" style="padding: 1px 3px; font-size: 7.5px;"><strong id="badge-duration">30s HD</strong></span>
+                            <span class="badge" style="padding: 1px 3px; font-size: 7.5px;"><strong id="badge-ratio">9:16</strong></span>
+                            <span class="badge" style="padding: 1px 3px; font-size: 7.5px; background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.4); color: #c084fc;"><strong id="badge-credits">2 Pts</strong></span>
+                            <span class="badge" id="badge-ghost" style="padding: 1px 3px; font-size: 7.5px; background: rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.4); color: #34d399;" title="Ghost Worker: Background Throttling Destroyed (Never Sleep)"><strong>👻 Ghost: ON</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unified Generation Settings (Duration & Aspect Ratio) -->
+                <div class="duration-selector-card" style="padding: 2px 5px; margin-bottom: 0px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1px;">
+                        <span class="duration-label" style="font-size: 8px; margin: 0;">⚡ Video Duration:</span>
+                        <span style="font-size: 7px; color: #a855f7; font-weight: 800;">SEEDANCE 2.5 (2 PTS)</span>
+                    </div>
+                    <div class="duration-pill-row">
+                        <button class="dur-pill" data-dur="10">10s</button>
+                        <button class="dur-pill" data-dur="15">15s</button>
+                        <button class="dur-pill" data-dur="20">20s</button>
+                        <button class="dur-pill" data-dur="25">25s</button>
+                        <button class="dur-pill active" data-dur="30">30s HD</button>
+                        <button class="dur-pill" data-dur="60">60s VIP</button>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px; margin-bottom: 1px;">
+                        <span class="duration-label" style="font-size: 8px; margin: 0;">📐 Aspect Ratio:</span>
+                        <span style="font-size: 7px; color: #38bdf8; font-weight: 800;">SEEDANCE 2.5</span>
+                    </div>
+                    <div class="ratio-pill-row">
+                        <button class="ratio-pill active" data-ratio="9:16">9:16</button>
+                        <button class="ratio-pill" data-ratio="16:9">16:9</button>
+                        <button class="ratio-pill" data-ratio="1:1">1:1</button>
+                        <button class="ratio-pill" data-ratio="3:4">3:4</button>
+                        <button class="ratio-pill" data-ratio="4:3">4:3</button>
+                        <button class="ratio-pill" data-ratio="21:9">21:9</button>
+                    </div>
+
+                    <!-- 🔄 OMNI REFERENCE (CLICK TO ATTACH) -->
+                    <div style="display: flex; flex-direction: column; gap: 3px; margin-top: 3px; padding-top: 3px; border-top: 1px dashed rgba(168, 85, 247, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="duration-label" style="font-size: 8px; font-weight: 800; margin: 0; color: #c4b5fd; display: flex; align-items: center; gap: 3px;">
+                                🔄 OMNI REFERENCE:
+                            </span>
+                            <span style="font-size: 7px; font-weight: 700; color: #a855f7; letter-spacing: 0.3px; text-transform: uppercase;">
+                                VISUAL CONTINUITY
+                            </span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 4px; width: 100%;">
+                            <button id="btn-toggle-omni-mode" class="omni-slider-toggle" style="display: flex; align-items: center; justify-content: center; gap: 3.5px; cursor: pointer; background: linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(168, 85, 247, 0.25)); border: 1px solid #a855f7; border-radius: 6px; padding: 3px 5px; height: 25px; transition: all 0.2s ease; user-select: none; box-shadow: 0 1px 4px rgba(124, 58, 237, 0.2);" title="Click to attach last video frame into composer on Dola">
+                                <span id="omni-slider-indicator" style="display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #c084fc; box-shadow: 0 0 4px #c084fc; flex-shrink: 0;"></span>
+                                <span id="omni-slider-label" style="font-size: 8px; font-weight: 800; color: #f8fafc; letter-spacing: 0.1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">➕ Attach Last Frame</span>
+                            </button>
+                            <button id="btn-open-video-ref" class="omni-slider-toggle" style="display: flex; align-items: center; justify-content: center; gap: 3.5px; cursor: pointer; background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(99, 102, 241, 0.25)); border: 1px solid #38bdf8; border-radius: 6px; padding: 3px 5px; height: 25px; transition: all 0.2s ease; user-select: none; box-shadow: 0 1px 4px rgba(56, 189, 248, 0.15);" title="Open Video Motion & Pose Reference Suite (Video-to-Video Engine)">
+                                <span style="display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 4px #38bdf8; flex-shrink: 0;"></span>
+                                <span style="font-size: 8px; font-weight: 800; color: #38bdf8; letter-spacing: 0.1px; white-space: nowrap;">🎬 Video Ref</span>
+                            </button>
+                            <button id="btn-open-actor-vault" class="omni-slider-toggle" style="display: flex; align-items: center; justify-content: center; gap: 3.5px; cursor: pointer; background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(168, 85, 247, 0.25)); border: 1px solid #f472b6; border-radius: 6px; padding: 3px 5px; height: 25px; transition: all 0.2s ease; user-select: none; box-shadow: 0 1px 4px rgba(244, 114, 182, 0.15);" title="Open Consistent Character & Actor Vault Engine">
+                                <span id="actor-vault-indicator" style="display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #f472b6; box-shadow: 0 0 4px #f472b6; flex-shrink: 0;"></span>
+                                <span id="actor-vault-label" style="font-size: 8px; font-weight: 800; color: #f472b6; letter-spacing: 0.1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">🎭 Actor Vault</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⚡ PARALLEL FARM & MULTI-ACCOUNT BATCH CONTROLLER -->
+                <div class="farm-selector-card" id="farm-control-card" style="padding: clamp(3px, 0.5vh, 6px) 6px; background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(99, 102, 241, 0.08)); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 7px; display: flex; flex-direction: column; gap: clamp(2px, 0.5vh, 4px); width: 100%; flex-shrink: 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span id="farm-card-title" style="font-size: clamp(8px, 1.2vh, 9px); font-weight: 800; color: #a855f7; display: flex; align-items: center; gap: 2px;">
+                            ⚡ PARALLEL FARM CONTROLLER
+                        </span>
+                        <span id="farm-batch-badge" class="badge" style="font-size: 7px; padding: 1px 4px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8;">
+                            Batch #1 (10 Tabs)
+                        </span>
+                    </div>
+
+                    <!-- 🎛️ SPEED PRESETS & CUSTOM TAB INPUT (ANTI-LAG GENTLE SPAWN) -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 2px; background: rgba(10, 8, 24, 0.7); padding: clamp(2px, 0.4vh, 4px) 4px; border-radius: 4px; border: 1px solid rgba(168, 85, 247, 0.25); min-height: clamp(18px, 2.8vh, 24px);">
+                        <span style="font-size: 6.8px; font-weight: 800; color: #cbd5e1; display: flex; align-items: center; gap: 1px;">
+                            🎛️ Mode:
+                        </span>
+                        <div style="display: flex; align-items: center; gap: 2px;">
+                            <button id="farm-preset-eco" type="button" style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; font-size: 6.8px; font-weight: 700; padding: 1px 4px; border-radius: 3px; cursor: pointer; transition: 0.15s;" title="Eco Mode: 3 Tabs (Low RAM, Zero Lag)">🟢 Eco (3)</button>
+                            <button id="farm-preset-turbo" type="button" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; font-size: 6.8px; font-weight: 700; padding: 1px 4px; border-radius: 3px; cursor: pointer; transition: 0.15s;" title="Turbo Mode: 5 Tabs (Balanced)">🟡 Turbo (5)</button>
+                            <button id="farm-preset-beast" type="button" style="background: rgba(239, 68, 68, 0.18); border: 1px solid #ef4444; color: #f87171; font-size: 6.8px; font-weight: 700; padding: 1px 4px; border-radius: 3px; cursor: pointer; transition: 0.15s; box-shadow: 0 0 4px rgba(239, 68, 68, 0.3);" title="Beast Mode: 10 Tabs (High Speed)">🔴 Beast (10)</button>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 2px;">
+                            <span style="font-size: 6.5px; color: #94a3b8; font-weight: 700;">Custom:</span>
+                            <input id="farm-custom-tab-count" type="number" min="1" max="50" value="10" style="width: 28px; height: 14px; background: rgba(15, 23, 42, 0.9); border: 1px solid #a855f7; color: #e2e8f0; font-size: 7.5px; font-weight: 800; text-align: center; border-radius: 3px; padding: 0; outline: none;" title="Enter custom tabs (e.g. 20)">
+                        </div>
+                    </div>
+
+                    <!-- Clean 3-Column Stats Grid -->
+                    <div class="farm-stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; height: clamp(24px, 3.6vh, 36px); width: 100%;">
+                        <div class="farm-stat-chip" style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 4px; padding: clamp(1px, 0.3vh, 3px) 2px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                            <span style="font-size: 6.5px; color: #94a3b8; display: block; line-height: 1.1;">👥 Accounts</span>
+                            <strong id="farm-acc-count" style="font-size: clamp(8px, 1.2vh, 9.5px); color: #34d399; font-weight: 800; line-height: 1.2;">0 Loaded</strong>
+                        </div>
+                        <div class="farm-stat-chip" style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; padding: clamp(1px, 0.3vh, 3px) 2px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                            <span style="font-size: 6.5px; color: #94a3b8; display: block; line-height: 1.1;">📝 Prompts</span>
+                            <strong id="farm-prompt-count" style="font-size: clamp(8px, 1.2vh, 9.5px); color: #38bdf8; font-weight: 800; line-height: 1.2;">0 Ready</strong>
+                        </div>
+                        <div class="farm-stat-chip" style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 4px; padding: clamp(1px, 0.3vh, 3px) 2px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                            <span style="font-size: 6.5px; color: #94a3b8; display: block; line-height: 1.1;">📦 Batches</span>
+                            <strong id="farm-total-batches" style="font-size: clamp(8px, 1.2vh, 9.5px); color: #f59e0b; font-weight: 800; line-height: 1.2;">0 Batches</strong>
+                        </div>
+                    </div>
+
+                    <!-- 2 Side-by-Side Left/Right Farm Action Buttons -->
+                    <div class="actions-grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px; height: clamp(26px, 4vh, 36px); width: 100%;">
+                        <button id="btn-launch-farm" class="btn-primary" style="background: linear-gradient(135deg, #059669, #10b981); border: 1px solid #34d399; padding: clamp(1px, 0.3vh, 3px) 4px; font-size: clamp(8px, 1.15vh, 8.8px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; border-radius: 6px; margin: 0; width: 100%; height: 100%; min-height: 0 !important;" title="Spawn tabs across accounts with one-by-one gentle spawn (zero lag)">
+                            <span id="label-launch-title" style="font-weight: 800; line-height: 1.1;">🚀 LAUNCH 10 TABS</span>
+                            <span id="label-launch-batch" style="font-size: 6.5px; opacity: 0.9; font-weight: normal; line-height: 1;">(Accounts 1–10 • 10 Slots)</span>
+                        </button>
+
+                        <button id="btn-next-batch" class="btn-primary" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); border: 1px solid #a855f7; padding: clamp(1px, 0.3vh, 3px) 4px; font-size: clamp(8px, 1.15vh, 8.8px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; border-radius: 6px; margin: 0; width: 100%; height: 100%; min-height: 0 !important;" title="Switch tabs to next batch with one-by-one gentle spawn">
+                            <span style="font-weight: 800; line-height: 1.1;">⚡ NEXT BATCH</span>
+                            <span id="label-next-batch" style="font-size: 6.5px; opacity: 0.9; font-weight: normal; line-height: 1;">(Accounts 11–20 ➔ P11–20)</span>
+                        </button>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1px; border-top: 1px dashed rgba(168, 85, 247, 0.2); min-height: 12px;">
+                        <span id="farm-status-text" style="font-size: 6.8px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 240px;">Staggered gentle spawn: Zero RAM surge &amp; zero tracking.</span>
+                        <button id="btn-close-farm" class="btn-mini-delete" style="font-size: 6.5px; padding: 0.5px 3px; display: none;" title="Close all active farm tabs">
+                            ✕ Close
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fast Actions Group: Unified Quick Action Suite -->
+                <div class="fast-actions-group" style="display: flex; flex-direction: column; gap: clamp(3px, 0.7vh, 6px); width: 100%; flex-shrink: 0;">
+                    <!-- Row 1: OPEN STUDIO & FAST DOWNLOAD -->
+                    <div class="actions-grid-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; height: clamp(28px, 4.4vh, 38px); width: 100%;">
+                        <button id="btn-open-studio" class="btn-primary" style="padding: clamp(1px, 0.3vh, 3px) 4px; font-size: clamp(8px, 1.15vh, 8.8px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; border-radius: 6px; margin: 0; width: 100%; height: 100%; min-height: 0 !important;">
+                            <span style="font-weight: 800; line-height: 1.1;">🎬 OPEN STUDIO</span>
+                            <span style="font-size: clamp(6.2px, 0.85vh, 6.8px); opacity: 0.85; font-weight: normal; line-height: 1;">(Zero Refusals • Instant)</span>
+                        </button>
+
+                        <button id="btn-fetch" class="btn-primary" style="background: linear-gradient(135deg, #7c3aed, #6366f1); border: 1px solid #a855f7; box-shadow: 0 2px 8px rgba(124,58,237,0.25); font-size: clamp(8px, 1.15vh, 8.8px); padding: clamp(1px, 0.3vh, 3px) 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; border-radius: 6px; margin: 0; width: 100%; height: 100%; min-height: 0 !important;" title="Grab video from active Dola chat and download directly">
+                            <span style="font-weight: 800; line-height: 1.1;">💽 FAST DOWNLOAD</span>
+                            <span style="font-size: clamp(6.2px, 0.85vh, 6.8px); opacity: 0.85; font-weight: normal; line-height: 1;">(Instant HD Grabber)</span>
+                        </button>
+                    </div>
+
+                    <!-- Row 2: 📦 BULK DOWNLOAD MODE CARD -->
+                    <div class="bulk-mode-control-card" style="padding: 6px 10px; background: linear-gradient(135deg, rgba(30, 27, 75, 0.95) 0%, rgba(49, 46, 129, 0.7) 100%); border: 1.5px solid rgba(129, 140, 248, 0.55); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; width: 100%; box-shadow: 0 2px 10px rgba(79, 70, 229, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 26px; height: 26px; border-radius: 6px; background: rgba(99, 102, 241, 0.25); border: 1px solid rgba(129, 140, 248, 0.4); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">
+                                📦
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 1px; justify-content: center;">
+                                <div style="font-size: 10px; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 5px; line-height: 1.15; letter-spacing: 0.2px;">
+                                    <span>Bulk Download Mode</span>
+                                    <span style="font-size: 7px; padding: 1px 4px; border-radius: 3px; background: rgba(129, 140, 248, 0.25); color: #c7d2fe; border: 1px solid rgba(129, 140, 248, 0.4); font-weight: 700;">ZIP ARCHIVE</span>
+                                </div>
+                                <span style="font-size: 7.8px; color: #a5b4fc; line-height: 1.1; font-weight: 500;">Pause auto-download &amp; batch export entire chat</span>
+                            </div>
+                        </div>
+                        <label class="switch" title="Toggle Bulk Download Mode" style="transform: scale(0.85); transform-origin: right center; margin: 0; flex-shrink: 0;">
+                            <input type="checkbox" id="toggle-bulk-mode">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <!-- Row 3: 📜 LOAD ALL CHAT VIDEOS & RESET BUTTONS -->
+                    <div style="display: grid; grid-template-columns: 3.5fr 1fr; gap: 4px; height: clamp(28px, 4.4vh, 38px); width: 100%;">
+                        <button id="btn-scroll-chat-videos" class="btn-primary btn-scroll-chat action-button" style="padding: clamp(1px, 0.3vh, 3px) 6px; background: linear-gradient(135deg, #4f46e5, #6366f1); border: 1px solid #818cf8; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; margin: 0; width: 100%; height: 100%; min-height: 0 !important; cursor: pointer;" title="Auto-scroll current Dola chat to top to load and extract all past videos">
+                            <span class="button-copy" style="display: flex; flex-direction: column; align-items: center; line-height: 1.1;">
+                                <strong style="font-size: clamp(8px, 1.15vh, 8.8px); line-height: 1.1;">📜 Load All Chat Videos</strong>
+                                <small style="font-size: clamp(6.2px, 0.85vh, 6.8px); line-height: 1; opacity: 0.9;">Auto-scrolls chat upwards</small>
+                            </span>
+                        </button>
+                        <button id="btn-reset-chat-videos" class="btn-secondary action-button" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(185, 28, 28, 0.15)); border: 1px solid rgba(239, 68, 68, 0.45); color: #fca5a5; border-radius: 6px; padding: clamp(1px, 0.3vh, 3px) 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1px; margin: 0; width: 100%; height: 100%; min-height: 0 !important; cursor: pointer;" title="Reset and forget extracted videos for the active chat">
+                            <strong style="font-size: clamp(8px, 1.15vh, 8.8px); line-height: 1.1;">🔄 Reset</strong>
+                            <small style="font-size: clamp(6.2px, 0.85vh, 6.8px); color: #f87171; line-height: 1;">Forget</small>
+                        </button>
+                    </div>
+
+                    <!-- Row 4: 🧹 RESET SESSION & RATE LIMITS -->
+                    <button id="btn-clear-session" class="btn-danger" style="background: linear-gradient(135deg, rgba(220, 38, 38, 0.18), rgba(153, 27, 27, 0.28)); border: 1px solid rgba(239, 68, 68, 0.38); border-radius: 6px; color: #fca5a5; font-size: clamp(7.5px, 1.1vh, 8.5px); font-weight: 700; letter-spacing: 0.2px; padding: clamp(1px, 0.3vh, 3px) 6px; height: clamp(22px, 3.4vh, 30px); min-height: 0 !important; margin: 0; display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; cursor: pointer; transition: all 0.2s ease;">
+                        <span>🧹 Reset Session &amp; Rate Limits</span>
+                    </button>
+                </div>
+
+
+
+                <!-- ☕ & 💬 UNIFIED BOTTOM FOOTER DOCK (SUPPORT, WHATSAPP & FACEBOOK) -->
+                <div class="whatsapp-channel-footer" id="bottom-channels-footer">
+                    <!-- 1. SUPPORT CREATOR / BUY ME A COFFEE -->
+                    <div class="support-creator-card bottom-dock-card" id="btn-open-donate-banner" title="Click to open Support Creator / Buy Me a Coffee details">
+                        <div class="bottom-dock-icon icon-support">
+                            <span>☕</span>
+                        </div>
+                        <div class="bottom-dock-text">
+                            <div class="bottom-dock-title-row">
+                                <span class="bottom-dock-title title-support">SUPPORT CREATOR / BUY ME A COFFEE</span>
+                                <span class="bottom-dock-badge badge-support">TIP ❤️</span>
+                            </div>
+                            <div class="bottom-dock-sub sub-support">Easypaisa (PK) • Binance Pay (Global) • 100% Free Suite</div>
+                        </div>
+                        <div class="bottom-dock-arrow arrow-support">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 2. WHATSAPP CHANNEL -->
+                    <a href="https://www.whatsapp.com/channel/0029VbDLcm5BVJl4yoHocF2j" target="_blank" rel="noopener noreferrer" class="whatsapp-channel-link bottom-dock-card" id="btn-whatsapp-channel" title="Join Official WhatsApp Channel">
+                        <div class="bottom-dock-icon icon-whatsapp">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.529 1.83.81 2.796.81 3.183 0 5.768-2.587 5.768-5.766.001-3.182-2.585-5.767-5.768-5.767zm0 10.366c-.859 0-1.637-.24-2.314-.687l-.165-.108-1.574.413.42-1.534-.117-.187c-.496-.79-.76-1.583-.76-2.497 0-2.535 2.062-4.597 4.598-4.597 2.536 0 4.598 2.062 4.598 4.597 0 2.535-2.062 4.597-4.598 4.597zm8.437-4.599c0 4.672-3.801 8.472-8.472 8.472-1.488 0-2.884-.39-4.101-1.071l-4.895 1.284 1.306-4.773c-.768-1.282-1.21-2.775-1.21-4.372 0-4.672 3.801-8.472 8.472-8.472 4.671 0 8.472 3.8 8.472 8.472z"/>
+                            </svg>
+                        </div>
+                        <div class="bottom-dock-text">
+                            <div class="bottom-dock-title-row">
+                                <span class="bottom-dock-title title-whatsapp">JOIN WHATSAPP CHANNEL</span>
+                                <span class="bottom-dock-badge badge-whatsapp">OFFICIAL</span>
+                            </div>
+                            <div class="bottom-dock-sub sub-whatsapp">VIP Updates, AI Prompts &amp; Support</div>
+                        </div>
+                        <div class="bottom-dock-arrow arrow-whatsapp">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <!-- 3. FACEBOOK PROFILE -->
+                    <a href="https://www.facebook.com/profile.php?id=61590732452324" target="_blank" rel="noopener noreferrer" class="facebook-channel-link bottom-dock-card" id="btn-facebook-channel" title="Follow on Official Facebook">
+                        <div class="bottom-dock-icon icon-facebook">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </div>
+                        <div class="bottom-dock-text">
+                            <div class="bottom-dock-title-row">
+                                <span class="bottom-dock-title title-facebook">FOLLOW ON FACEBOOK</span>
+                                <span class="bottom-dock-badge badge-facebook">OFFICIAL</span>
+                            </div>
+                            <div class="bottom-dock-sub sub-facebook">Video AI Tutorials, Guides &amp; Releases</div>
+                        </div>
+                        <div class="bottom-dock-arrow arrow-facebook">
+                            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- TAB 2: BULK PROMPTS -->
+            <div class="tab-content hidden" id="view-prompts">
+                <div class="section-header-row" style="margin-bottom: 2px;">
+                    <span class="section-title" style="font-size: 10px;">📝 BULK PROMPTS (<span id="prompt-counter">0</span>)</span>
+                    <div style="display: flex; gap: 3px;">
+                        <input type="file" id="file-upload-prompts" accept=".csv, .txt" style="display: none;">
+                        <button id="btn-trigger-upload" class="btn-mini-primary" style="padding: 2px 6px; min-height: 22px; font-size: 8.5px;" title="Import CSV or TXT file">
+                            📁 Upload
+                        </button>
+                        <button id="btn-reset-progress" class="btn-mini-primary" style="background:#1e1b4b; border-color:#6366f1; padding: 2px 6px; min-height: 22px; font-size: 8.5px;" title="Reset all Done checkmarks">
+                            🔄 Reset
+                        </button>
+                        <button id="btn-clear-prompts" class="btn-mini-delete" style="padding: 2px 6px; min-height: 22px; font-size: 8.5px;" title="Clear all prompts">
+                            🗑️ Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 🔍 Live Search Bar & Status Filters -->
+                <div class="search-filter-row" style="gap: 3px;">
+                    <input type="text" id="input-search-prompts" class="input-search" style="padding: 4px 8px; min-height: 26px; font-size: 10.5px;" placeholder="🔍 Search prompts (e.g. Lotus, Siren)...">
+                    <div class="filter-pills-row" style="gap: 3px;">
+                        <button class="filter-pill active" data-filter="all" style="padding: 2px 4px; min-height: 22px; font-size: 8.5px;">All (<span id="count-all">0</span>)</button>
+                        <button class="filter-pill" data-filter="queued" style="padding: 2px 4px; min-height: 22px; font-size: 8.5px;">⚪ Queued (<span id="count-queued">0</span>)</button>
+                        <button class="filter-pill" data-filter="done" style="padding: 2px 4px; min-height: 22px; font-size: 8.5px;">✅ Done (<span id="count-done">0</span>)</button>
+                    </div>
+                </div>
+
+                <!-- Fast Paste Box -->
+                <div class="prompt-input-card" style="padding: 5px; gap: 3px;">
+                    <textarea id="textarea-quick-prompts" class="input-textarea" style="min-height: 38px; max-height: 65px; padding: 4px 6px; font-size: 10px;" placeholder="Paste bulk prompts here (1 per line, paragraphs, or CSV)..."></textarea>
+                    <div id="paragraph-prompt-hint" style="display: flex; justify-content: space-between; font-size: 7.5px; color: #94a3b8; padding: 0 2px;">
+                        <span>Leave 1 blank line between multi-line prompts</span>
+                        <span>Detected: <strong id="detected-prompts-count" style="color: #c084fc;">0</strong></span>
+                    </div>
+                    <button id="btn-add-bulk-prompts" class="btn-primary" style="margin-top: 1px; padding: 4px; min-height: 26px; font-size: 9px;">
+                        ➕ Add Prompts to List
+                    </button>
+                </div>
+
+                <!-- Numbered Prompts List -->
+                <div class="prompts-list" id="prompts-container" style="flex: 1 1 0%; min-height: 180px; max-height: none; gap: 3px;">
+                    <div class="empty-state" style="padding: 12px 6px; font-size: 9.5px;">No prompts loaded yet. Upload a CSV/TXT or paste prompts above.</div>
+                </div>
+            </div>
+
+            <!-- TAB 3: BULK ACCOUNTS -->
+            <div class="tab-content hidden" id="view-accounts">
+                <div class="section-header-row" style="margin-bottom: 2px;">
+                    <span class="section-title" style="font-size: 10px;">👥 BULK ACCOUNTS (<span id="accounts-counter">0</span>)</span>
+                    <div style="display: flex; gap: 3px;">
+                        <input type="file" id="file-upload-accounts" multiple accept=".json, .txt, .netscape, .csv" style="display: none;">
+                        <button id="btn-close-all-account-tabs" class="btn-mini-delete" style="padding: 2px 6px; min-height: 22px; font-size: 8.5px; font-weight: 700; white-space: nowrap;" title="Close all open Dola / account tabs in Chrome">
+                            ✕ Close Tabs
+                        </button>
+                        <button id="btn-trigger-upload-accounts" class="btn-mini-primary" style="padding: 2px 6px; min-height: 22px; font-size: 8.5px;" title="Import multiple cookie files from Desktop/PC">
+                            📁 Upload
+                        </button>
+                        <button id="btn-capture-session" class="btn-mini-primary" style="padding: 2px 6px; min-height: 22px; font-size: 8.5px;" title="Capture active tab logged in account">
+                            + Capture
+                        </button>
+                        <button id="btn-clear-all-accounts" class="btn-mini-delete" style="padding: 2px 6px; min-height: 22px; font-size: 8.5px;" title="Clear all accounts">
+                            🗑️ Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 🔍 Live Account Search Bar -->
+                <div class="search-filter-row" style="gap: 3px;">
+                    <input type="text" id="input-search-accounts" class="input-search" style="padding: 4px 8px; min-height: 26px; font-size: 10.5px;" placeholder="🔍 Search accounts (e.g. Account 1, VIP)...">
+                </div>
+
+                <!-- Quick Paste Box for Single/Multi Account Cookies -->
+                <div class="prompt-input-card" style="padding: 5px; gap: 3px;">
+                    <input type="text" id="input-profile-name" class="input-text" style="margin-bottom: 2px; padding: 3px 6px; min-height: 24px; font-size: 10px;" placeholder="Account Name (blank to auto-number #01, #02...)">
+                    <textarea id="input-profile-cookies" class="input-textarea" style="min-height: 38px; max-height: 65px; padding: 4px 6px; font-size: 10px;" placeholder="Paste JSON array, Netscape format, or multi-account cookies..."></textarea>
+                    <button id="btn-import-profile" class="btn-primary" style="margin-top: 2px; padding: 4px; min-height: 28px; font-size: 9.5px;">
+                        ➕ Add / Import Account Cookies
+                    </button>
+                </div>
+
+                <!-- Numbered & Styled Accounts List -->
+                <div class="profiles-list" id="profiles-container" style="flex: 1 1 0%; min-height: 180px; max-height: none; gap: 3px;">
+                    <div class="empty-state" style="padding: 12px 6px; font-size: 9.5px;">No saved accounts yet. Click "Upload Files" or "Capture Tab" above.</div>
+                </div>
+            </div>
+
+            <!-- TAB 4: SETTINGS -->
+            <div class="tab-content hidden" id="view-settings">
+                <div class="settings-list" style="gap: 4px;">
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px;">
+                        <span>Enforce Video Duration</span>
+                        <select id="sel-duration" class="select-box" style="padding: 2px 4px; min-height: 24px; font-size: 9.5px; width: auto;">
+                            <option value="60">60s (Ultra HD VIP)</option>
+                            <option value="30" selected>30s (Max HD • 2 Pts)</option>
+                            <option value="25">25s (Super HD)</option>
+                            <option value="20">20s (Pro HD)</option>
+                            <option value="15">15s (Fast HD)</option>
+                            <option value="10">10s (Standard)</option>
+                        </select>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px;">
+                        <span>Account Maximum Credit Points Limit</span>
+                        <select id="sel-credit-limit" class="select-box" style="padding: 2px 4px; min-height: 24px; font-size: 9.5px; width: auto;">
+                            <option value="6" selected>6 Credits (3 Videos • Standard Daily)</option>
+                            <option value="10">10 Credits (5 Videos • High Quota / Day-1)</option>
+                        </select>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px;">
+                        <span>Daily Limit Auto-Account Rotator</span>
+                        <input type="checkbox" id="chk-autorotate">
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px;">
+                        <span>Auto-Advance to Next Prompt on Send</span>
+                        <input type="checkbox" id="chk-autonext" checked>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px;">
+                        <span>Auto-Download Finished Videos</span>
+                        <input type="checkbox" id="chk-auto-dl" checked>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px; background: rgba(99, 102, 241, 0.08); border-color: rgba(99, 102, 241, 0.3);">
+                        <span style="color: #c7d2fe; font-weight: 700;">📦 Bulk Download Mode (Auto-Pause & ZIP)</span>
+                        <input type="checkbox" id="chk-bulk-mode">
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px;">
+                        <span>Smart Brand & Stunt Auto-Sanitizer</span>
+                        <input type="checkbox" id="chk-safety" checked>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px; background: rgba(14, 165, 233, 0.08); border-color: rgba(14, 165, 233, 0.3);">
+                        <span style="color: #38bdf8; font-weight: 700;">🚀 Turbo Speed (Block Telemetry & Trackers)</span>
+                        <input type="checkbox" id="chk-telemetry-shield" checked>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px; background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.3);">
+                        <span style="color: #c084fc; font-weight: 700;">🎭 Anti-Fingerprint Hardware Masking</span>
+                        <input type="checkbox" id="chk-fingerprint-mask" checked>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px; background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.3);">
+                        <span style="color: #c084fc; font-weight: 700;">🔄 Omni-Ref Last-Frame Continuation (CapCut Style)</span>
+                        <input type="checkbox" id="chk-omni-chain" checked>
+                    </label>
+                    <label class="setting-item" style="padding: 5px 8px; font-size: 10px; background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3);">
+                        <span style="color: #34d399; font-weight: 700;">👻 Ghost Worker (Anti-Throttle & Never-Sleep Mode)</span>
+                        <input type="checkbox" id="chk-ghost-worker" checked>
+                    </label>
+
+                    <!-- 🏷️ SMART DOWNLOAD FILENAME FORMATTER -->
+                    <div class="setting-item" style="flex-direction: column; align-items: stretch; gap: 5px; padding: 7px 8px; background: rgba(30, 22, 56, 0.7); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 7px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 9.5px; font-weight: 800; color: #c084fc; display: flex; align-items: center; gap: 3px;">
+                                🏷️ SMART FILENAME FORMATTER
+                            </span>
+                            <span class="badge" style="font-size: 7px; padding: 1px 4px; background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">Auto-Renamer</span>
+                        </div>
+                        
+                        <!-- Quick Presets Dropdown -->
+                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                            <span style="font-size: 8px; color: #94a3b8; font-weight: 600;">Naming Preset:</span>
+                            <select id="sel-filename-preset" class="select-box" style="padding: 2px 4px; min-height: 22px; font-size: 9px; width: 100%;">
+                                <option value="{prompt}_{duration}">1. Clean Prompt & Duration ({prompt}_{duration})</option>
+                                <option value="{prompt}_{date}_{time}">2. Prompt + Date & Time ({prompt}_{date}_{time})</option>
+                                <option value="[{account}]_{prompt}_{duration}">3. Account First ([{account}]_{prompt}_{duration})</option>
+                                <option value="Clip_{index}_{prompt}">4. Numbered Sequence (Clip_{index}_{prompt})</option>
+                                <option value="ChannaTheBrand_{prompt}_{resolution}">5. Brand + 1080P (ChannaTheBrand_{prompt}_{resolution})</option>
+                                <option value="custom">⚙️ Custom Pattern...</option>
+                            </select>
+                        </div>
+
+                        <!-- Pattern Input -->
+                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                            <span style="font-size: 8px; color: #94a3b8; font-weight: 600;">Filename Pattern:</span>
+                            <input type="text" id="input-filename-pattern" class="input-text" style="padding: 3px 6px; min-height: 24px; font-size: 9.5px; font-family: monospace; color: #38bdf8;" value="{prompt}_{duration}">
+                        </div>
+
+                        <!-- Clickable Token Tag Chips -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 3px; align-items: center;">
+                            <span style="font-size: 7.5px; color: #64748b; font-weight: 600; margin-right: 1px;">Tags:</span>
+                            <button type="button" class="btn-tag-chip" data-tag="{prompt}" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #c084fc; cursor: pointer;">{prompt}</button>
+                            <button type="button" class="btn-tag-chip" data-tag="{account}" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #38bdf8; cursor: pointer;">{account}</button>
+                            <button type="button" class="btn-tag-chip" data-tag="{duration}" style="background: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #34d399; cursor: pointer;">{duration}</button>
+                            <button type="button" class="btn-tag-chip" data-tag="{date}" style="background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #fbbf24; cursor: pointer;">{date}</button>
+                            <button type="button" class="btn-tag-chip" data-tag="{time}" style="background: rgba(244, 114, 182, 0.15); border: 1px solid rgba(244, 114, 182, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #f472b6; cursor: pointer;">{time}</button>
+                            <button type="button" class="btn-tag-chip" data-tag="{index}" style="background: rgba(129, 140, 248, 0.15); border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #818cf8; cursor: pointer;">{index}</button>
+                            <button type="button" class="btn-tag-chip" data-tag="{resolution}" style="background: rgba(232, 121, 249, 0.15); border: 1px solid rgba(232, 121, 249, 0.3); border-radius: 3px; padding: 1px 4px; font-size: 7.5px; color: #e879f9; cursor: pointer;">{resolution}</button>
+                        </div>
+
+                        <!-- Live Preview Box -->
+                        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(51, 65, 85, 0.6); border-radius: 4px; padding: 3px 6px; display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-size: 7px; color: #64748b; font-weight: 700;">PREVIEW:</span>
+                            <span id="filename-preview-text" style="font-size: 8px; font-family: monospace; color: #4ade80; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 210px;">Golden_Lotus_Goddess_30s_HD.mp4</span>
+                        </div>
+                    </div>
+
+                    <!-- 💖 SUPPORT CREATOR ITEM IN SETTINGS -->
+                    <div class="setting-item" id="btn-open-donate-settings" style="cursor: pointer; margin-top: 4px; padding: 5px 8px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.15)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 7px; display: flex; justify-content: space-between; align-items: center;" title="Open Support Creator / Buy Me a Coffee details">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 13px;">☕</span>
+                            <div>
+                                <span style="color: #fbbf24; font-weight: 700; font-size: 9.5px; display: block; line-height: 1.2;">Support Creator (Buy Me a Coffee)</span>
+                                <span style="color: #94a3b8; font-size: 7.5px; display: block; line-height: 1;">Easypaisa (PK) • Binance Pay UID (Global)</span>
+                            </div>
+                        </div>
+                        <span style="font-size: 7.5px; color: #fde68a; font-weight: 700; background: rgba(245, 158, 11, 0.25); border: 1px solid rgba(245, 158, 11, 0.4); padding: 2px 6px; border-radius: 999px;">Details ➔</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: LOGS -->
+            <div class="tab-content hidden" id="view-logs" style="display: flex; flex-direction: column; height: 100%;">
+                <div class="section-header-row" style="margin-bottom: 3px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                        <span class="section-title" style="font-size: 10px; font-weight: 800; color: #38bdf8;">📋 SYSTEM EVENT LOGS</span>
+                        <span class="badge" style="font-size: 6.5px; padding: 1px 4px; background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4);">● LIVE SYNC</span>
+                    </div>
+                    <div style="display: flex; gap: 3px;">
+                        <button id="btn-copy-logs" class="btn-mini-primary" style="padding: 2px 6px; min-height: 20px; font-size: 8px;" title="Copy all logs to clipboard">
+                            📋 Copy
+                        </button>
+                        <button id="btn-clear-logs" class="btn-mini-delete" style="padding: 2px 6px; min-height: 20px; font-size: 8px;" title="Clear log terminal">
+                            🧹 Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="terminal" id="terminal">
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-system">[Ready]</span> <span class="log-msg">ChannaTheBrand Pro v10.0 Suite initialized.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-engine">[Engine]</span> <span class="log-msg">⚡ ChannaTheBrand Pro Suite 100% Unlocked.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-engine">[Durations]</span> <span class="log-msg">⚡ 10s Default, 15s, 20s, 25s, 30s, 60s HD enabled.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-grabber">[Fast Download]</span> <span class="log-msg">📹 Direct Dola Stream Grabber Active.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-accounts">[Accounts]</span> <span class="log-msg">👥 Bulk Multi-File Cookie Importer &amp; Search Active.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-prompts">[Prompts]</span> <span class="log-msg">📝 Bulk Prompts Queue &amp; 0ms Batch Renderer Standby.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-farm">[Parallel Farm]</span> <span class="log-msg">🚀 10-Tab Multi-Account SessionBox Controller Active.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-shield">[Shield]</span> <span class="log-msg">🛡️ Hardware Anti-Fingerprint Masking &amp; Ghost Worker ON.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-vault">[Actor Vault]</span> <span class="log-msg">🎭 Consistent Character &amp; Face Continuity Vault Ready.</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-support">[Support]</span> <span class="log-msg">☕ Creator Support Synced (Easypaisa PK &amp; Binance Pay Global).</span></div>
+                    <div class="terminal-line"><span class="log-time">[System]</span> <span class="log-tag tag-action">[Status]</span> <span class="log-msg">🟢 All 70 Autonomous Automation Engines Online &amp; Ready.</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🎭 CONSISTENT CHARACTER & ACTOR VAULT MODAL DRAWER -->
+        <div id="modal-actor-vault" class="actor-vault-modal hidden">
+            <div class="actor-vault-card">
+                <!-- Header -->
+                <div class="actor-vault-header">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="font-size: 16px;">🎭</span>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 800; color: #f472b6; letter-spacing: 0.3px;">ACTOR VAULT & CONTINUITY</div>
+                            <div style="font-size: 7.5px; color: #94a3b8;">Consistent Character Facial & Style DNA</div>
+                        </div>
+                    </div>
+                    <button id="btn-close-actor-vault" class="btn-vault-close" title="Close Character Vault">✕</button>
+                </div>
+
+                <!-- Active Character Sticky Status / Quick Action -->
+                <div id="actor-active-banner" class="actor-active-banner">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div id="actor-active-avatar-box" class="actor-active-avatar-box">
+                            <span id="actor-active-empty-icon" style="font-size: 14px;">👤</span>
+                            <img id="actor-active-avatar-img" src="" class="actor-active-avatar-img hidden" alt="Active Character">
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <span style="font-size: 7px; text-transform: uppercase; font-weight: 800; color: #34d399; letter-spacing: 0.5px;">Active Actor:</span>
+                                <strong id="actor-active-name" style="font-size: 10px; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">No Character Locked</strong>
+                            </div>
+                            <div id="actor-active-dna-snippet" style="font-size: 7.5px; color: #c4b5fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Select or add a character below</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 4px; margin-top: 4px;">
+                        <button id="btn-attach-active-actor" class="btn-vault-primary" style="flex: 1;" title="Attach reference photo to active Dola chat input">
+                            ⚡ Stage to Chat
+                        </button>
+                        <button id="btn-clear-active-actor" class="btn-vault-secondary" style="flex: 0 0 auto;" title="Unlock active character">
+                            🔓 Unlock
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Continuity Engine Settings -->
+                <div class="actor-vault-toggles">
+                    <label class="actor-toggle-item" title="Automatically attach active character photo to Dola composer">
+                        <span>📸 Auto-Attach Photo to Chat</span>
+                        <input type="checkbox" id="chk-actor-auto-attach" checked>
+                    </label>
+                    <label class="actor-toggle-item" title="Automatically inject character DNA tokens into prompts">
+                        <span>🧬 Auto-Inject Character DNA</span>
+                        <input type="checkbox" id="chk-actor-auto-dna" checked>
+                    </label>
+                    <label class="actor-toggle-item" title="CapCut style: Grab last frame of completed video for next prompt scene continuation">
+                        <span>🔄 Chain Story Continuation</span>
+                        <input type="checkbox" id="chk-actor-chain-story" checked>
+                    </label>
+                </div>
+
+                <!-- Create / Edit Actor Form -->
+                <div class="actor-form-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <span id="actor-form-title" style="font-size: 8.5px; font-weight: 800; color: #f472b6;">➕ NEW CHARACTER PROFILE</span>
+                        <button id="btn-reset-actor-form" style="background: none; border: none; font-size: 7.5px; color: #94a3b8; cursor: pointer;">Clear Form</button>
+                    </div>
+
+                    <!-- Actor Name -->
+                    <div style="margin-bottom: 4px;">
+                        <span style="font-size: 7.5px; color: #94a3b8; display: block; margin-bottom: 1px;">Character / Actor Name:</span>
+                        <input type="text" id="input-actor-name" class="input-text" placeholder="e.g. Sarah Cyberpunk, Marcus Viking" style="padding: 3px 6px; font-size: 9px; width: 100%; box-sizing: border-box;">
+                    </div>
+
+                    <!-- Reference Photo Uploader & Frame Grabber -->
+                    <div style="margin-bottom: 4px;">
+                        <span style="font-size: 7.5px; color: #94a3b8; display: block; margin-bottom: 1px;">Face & Character Reference Photo:</span>
+                        <div style="display: flex; gap: 4px; align-items: center;">
+                            <div id="actor-photo-preview-box" class="actor-photo-preview-box" title="Photo Preview">
+                                <span id="actor-preview-placeholder" style="font-size: 11px;">📷</span>
+                                <img id="actor-preview-img" src="" class="actor-preview-img hidden" alt="Preview">
+                            </div>
+                            <div style="flex: 1; display: flex; flex-direction: column; gap: 2px;">
+                                <div style="display: flex; gap: 3px;">
+                                    <label class="btn-vault-file-label" style="flex: 1; text-align: center; cursor: pointer;">
+                                        📁 Upload Photo
+                                        <input type="file" id="input-actor-photo" accept="image/*" style="display: none;">
+                                    </label>
+                                    <button type="button" id="btn-grab-chat-frame" class="btn-vault-secondary" style="font-size: 7.5px; padding: 2px 5px;" title="Extract current frame from active Dola chat video">
+                                        📸 Grab Chat Frame
+                                    </button>
+                                </div>
+                                <button type="button" id="btn-remove-actor-photo" class="btn-vault-danger hidden" style="font-size: 7px; padding: 1px 4px; width: fit-content;">Remove Photo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Character DNA Prompt Tokens -->
+                    <div style="margin-bottom: 4px;">
+                        <span style="font-size: 7.5px; color: #94a3b8; display: block; margin-bottom: 1px;">Character DNA Tokens (Appearance Anchor):</span>
+                        <textarea id="input-actor-dna" class="input-text" rows="2" placeholder="e.g. 26yo athletic woman, sharp cheekbones, emerald green eyes, black high ponytail, glowing neon purple cyberpunk jacket" style="padding: 3px 6px; font-size: 8.5px; width: 100%; resize: vertical; min-height: 38px; box-sizing: border-box;"></textarea>
+                        
+                        <!-- Quick DNA Tag Chips -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 2px; margin-top: 2px;">
+                            <span style="font-size: 7px; color: #64748b; margin-right: 1px;">Quick Tags:</span>
+                            <button type="button" class="btn-dna-chip" data-tag="25yo woman, striking green eyes">👩 Woman</button>
+                            <button type="button" class="btn-dna-chip" data-tag="30yo athletic man, sharp jawline">👨 Man</button>
+                            <button type="button" class="btn-dna-chip" data-tag="anime style, vibrant colors">🌸 Anime</button>
+                            <button type="button" class="btn-dna-chip" data-tag="cyberpunk glowing neon jacket">⚡ Cyberpunk</button>
+                            <button type="button" class="btn-dna-chip" data-tag="photorealistic, 8k cinematic skin texture">📸 Photoreal</button>
+                            <button type="button" class="btn-dna-chip" data-tag="high black ponytail">💇 Ponytail</button>
+                        </div>
+                    </div>
+
+                    <!-- Save / Add Button -->
+                    <button id="btn-save-actor" class="btn-vault-primary" style="width: 100%; min-height: 24px; margin-top: 2px;">
+                        💾 Save Character to Vault
+                    </button>
+                </div>
+
+                <!-- Vault Characters List -->
+                <div class="actor-list-section" style="margin-top: 4px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+                        <span id="actor-vault-count-label" style="font-size: 8.5px; font-weight: 800; color: #c084fc;">🎭 SAVED CHARACTERS (0)</span>
+                        <button id="btn-load-sample-actors" style="background: none; border: none; font-size: 7.5px; color: #38bdf8; cursor: pointer; text-decoration: underline;">+ Add Sample Presets</button>
+                    </div>
+                    <div id="actor-vault-list" class="actor-vault-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ☕ SUPPORT CREATOR & BUY ME A COFFEE MODAL DRAWER -->
+        <div id="modal-donate" class="actor-vault-modal hidden">
+            <div class="actor-vault-card" style="border-color: rgba(245, 158, 11, 0.45); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 158, 11, 0.15);">
+                <!-- Header -->
+                <div class="actor-vault-header" style="border-bottom: 1px solid rgba(245, 158, 11, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="font-size: 16px;">☕</span>
+                        <div>
+                            <div style="font-size: 11px; font-weight: 800; color: #fbbf24; letter-spacing: 0.3px;">SUPPORT THE CREATOR</div>
+                            <div style="font-size: 7.5px; color: #94a3b8;">ChannaTheBrand Pro is 100% Free • Tips Support Future Updates!</div>
+                        </div>
+                    </div>
+                    <button id="btn-close-donate" class="btn-vault-close" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;" title="Close">✕</button>
+                </div>
+
+                <!-- Channel Selector Tabs (PK vs International) -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; margin-bottom: 4px;">
+                    <button id="tab-donate-pk" type="button" class="donate-channel-tab active" style="padding: 4px 6px; font-size: 8.5px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: 0.15s; text-align: center; border: 1px solid #10b981; background: rgba(16, 185, 129, 0.2); color: #34d399;">
+                        🇵🇰 Easypaisa / PK
+                    </button>
+                    <button id="tab-donate-crypto" type="button" class="donate-channel-tab" style="padding: 4px 6px; font-size: 8.5px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: 0.15s; text-align: center; border: 1px solid rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.08); color: #cbd5e1;">
+                        🌐 Binance / Global
+                    </button>
+                </div>
+
+                <!-- SECTION 1: PAKISTAN (EASYPAISA) -->
+                <div id="donate-content-pk" style="display: flex; flex-direction: column; gap: 5px;">
+                    <!-- Name Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 4px 7px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <span style="font-size: 6.8px; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block;">Account Title:</span>
+                            <strong id="val-donate-name" style="font-size: 9.5px; color: #ffffff;">Waheed Ahmad</strong>
+                        </div>
+                        <button class="btn-copy-donate" data-copy="Waheed Ahmad" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-size: 7.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; cursor: pointer; transition: all 0.15s;">📋 Copy</button>
+                    </div>
+
+                    <!-- Method Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 4px 7px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <span style="font-size: 6.8px; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block;">Bank / Method:</span>
+                            <strong style="font-size: 9.5px; color: #34d399;">Easypaisa / Telenor Bank</strong>
+                        </div>
+                        <span style="font-size: 7px; background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 1px 5px; border-radius: 3px; font-weight: 700;">Instant</span>
+                    </div>
+
+                    <!-- IBAN Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 4px 7px; display: flex; flex-direction: column; gap: 2px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 6.8px; color: #94a3b8; text-transform: uppercase; font-weight: 700;">IBAN Number:</span>
+                            <button class="btn-copy-donate" data-copy="PK84TMFB0000000026456836" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-size: 7.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; cursor: pointer; transition: all 0.15s;">📋 Copy IBAN</button>
+                        </div>
+                        <span style="font-size: 8px; font-family: monospace; font-weight: 800; color: #4ade80; word-break: break-all; background: rgba(0,0,0,0.35); padding: 2px 5px; border-radius: 3px;">PK84TMFB0000000026456836</span>
+                    </div>
+
+                    <!-- QR Code Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 6px; padding: 5px; text-align: center;">
+                        <span style="font-size: 7.5px; color: #cbd5e1; font-weight: 700; display: block; margin-bottom: 3px;">📲 Scan with Easypaisa App:</span>
+                        <div style="display: inline-block; padding: 4px; background: #ffffff; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);">
+                            <img src="easypaisa_qr.png" alt="Easypaisa QR Code" style="width: 120px; height: 120px; display: block; object-fit: contain;">
+                        </div>
+                        <span style="font-size: 6.8px; color: #94a3b8; display: block; margin-top: 2px;">Waheed Ahmad • MSISDN: *******8007</span>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: BINANCE (CRYPTO / GLOBAL) -->
+                <div id="donate-content-crypto" class="hidden" style="display: flex; flex-direction: column; gap: 5px;">
+                    <!-- Nickname Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 6px; padding: 4px 7px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <span style="font-size: 6.8px; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block;">Binance Nickname:</span>
+                            <strong id="val-donate-nickname" style="font-size: 9.5px; color: #fbbf24;">channathebrand</strong>
+                        </div>
+                        <button class="btn-copy-donate" data-copy="channathebrand" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #fbbf24; color: #fbbf24; font-size: 7.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; cursor: pointer; transition: all 0.15s;">📋 Copy</button>
+                    </div>
+
+                    <!-- Binance UID Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 6px; padding: 5px 7px; display: flex; flex-direction: column; gap: 2px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 6.8px; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Binance Pay UID:</span>
+                            <button class="btn-copy-donate" data-copy="370403238" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #fbbf24; color: #fbbf24; font-size: 7.5px; font-weight: 700; padding: 2px 6px; border-radius: 4px; cursor: pointer; transition: all 0.15s;">📋 Copy UID</button>
+                        </div>
+                        <span style="font-size: 11px; font-family: monospace; font-weight: 800; color: #fbbf24; word-break: break-all; background: rgba(0,0,0,0.35); padding: 3px 6px; border-radius: 3px; letter-spacing: 1px; text-align: center;">370403238</span>
+                    </div>
+
+                    <!-- Binance Pay Guide Card -->
+                    <div style="background: rgba(18, 13, 36, 0.85); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 6px; padding: 8px 7px; text-align: center;">
+                        <div style="font-size: 8px; font-weight: 800; color: #fde68a; margin-bottom: 2px;">⚡ Send via Binance Pay (Zero Fee):</div>
+                        <div style="font-size: 7px; color: #cbd5e1; line-height: 1.45;">
+                            Open Binance App ➔ Pay icon (top-right) ➔ Send ➔ Select <strong>Pay ID / UID</strong> ➔ Enter <strong>370403238</strong> ➔ Send any amount of USDT/Crypto!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Thank You Note -->
+                <div style="margin-top: 4px; padding-top: 4px; border-top: 1px dashed rgba(245, 158, 11, 0.25); text-align: center;">
+                    <div style="font-size: 7.5px; color: #cbd5e1; font-weight: 600;">
+                        ❤️ Thank you for supporting independent AI development!
+                    </div>
+                    <div style="font-size: 6.8px; color: #94a3b8; margin-top: 1px;">
+                        Send screenshot on WhatsApp channel to get a VIP Supporter badge.
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 6px; margin-top: 4px;">
+                        <a href="https://www.facebook.com/profile.php?id=61590732452324" target="_blank" rel="noopener noreferrer" style="font-size: 7.5px; font-weight: 700; color: #60a5fa; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; background: rgba(37, 99, 235, 0.18); border: 1px solid rgba(59, 130, 246, 0.4); padding: 2px 7px; border-radius: 4px; transition: 0.15s;">
+                            <span>📘</span> Follow on Facebook
+                        </a>
+                        <a href="https://www.whatsapp.com/channel/0029VbDLcm5BVJl4yoHocF2j" target="_blank" rel="noopener noreferrer" style="font-size: 7.5px; font-weight: 700; color: #34d399; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(16, 185, 129, 0.4); padding: 2px 7px; border-radius: 4px; transition: 0.15s;">
+                            <span>💬</span> WhatsApp Channel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
